@@ -1,19 +1,28 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './Pages/Home'
 import SignIn from './Pages/SignIn'
+import Profile from './components/Profile'
+import PrivateRoute from "./routes/PrivateRoute"
 import Layout from './components/Layout'
-import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="sign-in" element={<SignIn />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
 

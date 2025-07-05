@@ -1,24 +1,19 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Profile from "../components/Profile";
+import { useSelector } from "react-redux";
 
 
 
 const user = () => {
-  const navigate = useNavigate();
-
-useEffect(() => {
-    const token = localStorage.getItem("userToken")
-    if (!token) {
-      navigate("/sign-in");
-    } 
-
-}, []);
-
+  const { user } = useSelector((state) => state.auth)
+console.log ('User component rendered:', user);
   return (
     <>
       <main class="main bg-dark">
+        < Profile />
         <div class="header">
-          <h1>
+          <h1 className="">
             Welcome back
             <br />
             Tony Jarvis!

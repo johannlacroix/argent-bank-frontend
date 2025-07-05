@@ -59,6 +59,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
         state.user = action.payload
+        console.log('Profil utilisateur récupéré:', action.payload)
       })
   },
 })

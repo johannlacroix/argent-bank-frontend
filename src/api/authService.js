@@ -10,7 +10,7 @@ export const login = async (email, password) => {
 };
 
 export const getProfile = async (token) => {
-  return axios.post(`${API_URL}/profile`, {}, {
+  return axios.get(`${API_URL}/profile`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

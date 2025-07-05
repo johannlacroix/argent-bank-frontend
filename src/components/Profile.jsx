@@ -8,10 +8,10 @@ export default function Profile() {
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>
+        <h1 className='profile'>
           Bienvenue {user.firstName} {user.lastName}
         </h1>
-        <p>Pseudo : {user.userName}</p>
+        <p className="profile">Pseudo : {user.userName}</p>
       </div>
     </main>
   )

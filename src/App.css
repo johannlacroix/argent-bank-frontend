@@ -54,7 +54,22 @@ body {
 
 .main-nav-item {
   text-decoration: none;
-  margin-right: 0.5rem;
+  margin-right: 1rem; /* légèrement plus grand */
+  color: #42b983;
+  
+  font-size: 1.5rem;      /* taille du texte + icône (~x2) */
+  padding: 0.5rem 1rem;   /* espacement interne */
+  display: inline-flex;   /* aligne texte + icône */
+  align-items: center;
+  gap: 0.5rem;            /* espace entre icône et texte */
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .main-nav-item {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+  }
 }
 
 .main-nav-item:hover {
@@ -236,16 +251,19 @@ body {
   box-sizing: border-box;
   text-align: left;
   margin-bottom: 2rem;
+  color:black
 }
 
 .account-amount {
   margin: 0;
   font-size: 2.5rem;
   font-weight: bold;
+  color:black
 }
 
 .account-amount-description {
   margin: 0;
+  color:black
 }
 
 .account-title {
@@ -253,11 +271,13 @@ body {
   padding: 0;
   font-size: 1rem;
   font-weight: normal;
+  color:black
 }
 
 .account-content-wrapper {
   width: 100%;
   flex: 1;
+  color:black
 }
 
 .edit-button {
@@ -297,4 +317,34 @@ body {
   .transaction-button {
     width: 200px;
   }
+}
+
+.field {
+  background-color: #f2f2f2;
+  border: 1px solid #a0a0a0;
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-bottom: 0.5rem;
+}
+
+.btn-green {
+  background-color: #00bc77;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.success-msg {
+  color: #00bc77;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.welcome {
+  color:black
 }

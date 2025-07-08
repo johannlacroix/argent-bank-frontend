@@ -16,3 +16,15 @@ export const getProfile = async (token) => {
     },
   });
 };
+
+export const updateProfile = async (token, newUserName) => {
+  return axios.put(
+    `${API_URL}/profile`,
+    { userName: newUserName },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};

@@ -1,16 +1,25 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { logout } from '../redux/authSlice'
-import { useNavigate, Outlet, Link } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/authSlice";
+import { useNavigate, Outlet, Link } from "react-router-dom";
 
 function Layout() {
-  const token = useSelector((state) => state.auth.token)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const { token, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout())
-    navigate('/')
-  }
+    dispatch(logout());
+    navigate("/");
+  };
+
+  const handleGoToProfile = () => {
+    navigate("/profile"); // ou "/user" si tu préfères
+  };
+
+  const handleGoToSettings = () => {
+    // Tu pourras rediriger ici plus tard
+    console.log("Redirection vers paramètres à implémenter");
+  };
 
   return (
     <>
@@ -23,19 +32,45 @@ function Layout() {
           />
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
-        <div>
-          {token ? (
-  <button className="main-nav-item" onClick={handleLogout}>
-    <i className="fa fa-user-circle"></i>
-    Sign Out
-  </button>
-) : (
-  <Link className="main-nav-item" to="/login">
-    <i className="fa fa-user-circle"></i>
-    Sign In
-  </Link>
-)}
 
+        <div className="main-nav-user-actions" style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          {token ? (
+            <>
+              {/* vers le profil */}
+              <span
+                className="main-nav-item"
+                onClick={handleGoToProfile}
+                style={{ cursor: "pointer" }}
+              >
+                {user?.userName}
+              </span>
+
+              <i
+                className="fa fa-user-circle main-nav-item"
+                onClick={handleGoToProfile}
+                style={{ cursor: "pointer" }}
+              ></i>
+
+              {/* paramètres */}
+              <i
+                className="fa fa-cog main-nav-item"
+                onClick={handleGoToSettings}
+                style={{ cursor: "pointer" }}
+              ></i>
+
+              {/* Logout */}
+              <i
+                className="fa fa-power-off main-nav-item"
+                onClick={handleLogout}
+                style={{ cursor: "pointer", color: "#42b983" }}
+              ></i>
+            </>
+          ) : (
+            <Link className="main-nav-item" to="/login">
+              <i className="fa fa-user-circle"></i>
+              Sign In
+            </Link>
+          )}
         </div>
       </nav>
 
@@ -45,7 +80,7 @@ function Layout() {
         <p className="footer-text">Copyright 2020 Argent Bank</p>
       </footer>
     </>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser, fetchUserProfile } from '../redux/authSlice'
+import { loginUser } from '../redux/authSlice'
+// import { fetchUserProfile } from '../redux/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -15,7 +16,7 @@ function SignIn() {
     e.preventDefault()
     const result = await dispatch(loginUser({ email, password }))
     if (loginUser.fulfilled.match(result)) {
-      await dispatch(fetchUserProfile())
+      // await dispatch(fetchUserProfile())
       navigate('/profile')
     }
   }

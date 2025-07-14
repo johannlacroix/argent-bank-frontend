@@ -49,7 +49,7 @@ const user = () => {
           <div className="account-content-wrapper cta">
             <button
               className="transaction-button"
-              onClick={() => goToTransactions("checking")}
+              onClick={() => goToTransactions("savings")}
             >
               View transactions
             </button>
@@ -64,7 +64,7 @@ const user = () => {
           <div className="account-content-wrapper cta">
             <button
               className="transaction-button"
-              onClick={() => goToTransactions("checking")}
+              onClick={() => goToTransactions("credit")}
             >
               View transactions
             </button>

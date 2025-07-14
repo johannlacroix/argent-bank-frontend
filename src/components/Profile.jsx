@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { updateUserProfile } from "../redux/authSlice";
+import { useEffect, useState } from "react";
+import { updateUserProfile, fetchUserProfile } from "../redux/authSlice";
 
 export default function Profile() {
   const { user } = useSelector((state) => state.auth);
@@ -10,6 +10,14 @@ export default function Profile() {
     user?.userName || ""
   );
   const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    const token=localStorage.getItem("token");
+    if (token && !user) {
+      dispatch(fetchUserProfile());
+    }
+  
+  }, [dispatch]);
 
   const handleSave = async () => {
     await dispatch(updateUserProfile(editableUserName));

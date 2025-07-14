@@ -69,3 +69,14 @@ button:focus-visible {
 .profile {
   color: #242424
 }
+
+.transaction-details i {
+  color: white;
+}
+
+.transaction-details i {
+  color: white;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}

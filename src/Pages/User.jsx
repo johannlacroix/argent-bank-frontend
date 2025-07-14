@@ -17,9 +17,7 @@ const user = () => {
       <main className="main bg-dark">
         <Profile />
         <div className="header">
-          <h1 className="welcome">
-            Welcome back {user?.userName}
-          </h1>
+          <h1 className="welcome">Welcome back {user?.userName}</h1>
           {/* <button className="edit-button">Edit Name</button> */}
         </div>
         <h2 className="sr-only">Accounts</h2>
@@ -31,10 +29,11 @@ const user = () => {
           </div>
           <div className="account-content-wrapper cta">
             <button
-              className="transaction-button"
+              className="chevron-button"
               onClick={() => goToTransactions("checking")}
+              aria-label="View transactions"
             >
-              View transactions
+              &rsaquo;
             </button>
           </div>
         </section>
@@ -46,10 +45,11 @@ const user = () => {
           </div>
           <div className="account-content-wrapper cta">
             <button
-              className="transaction-button"
-              onClick={() => goToTransactions("savings")}
+              className="chevron-button"
+              onClick={() => goToTransactions("checking")}
+              aria-label="View transactions"
             >
-              View transactions
+              &rsaquo;
             </button>
           </div>
         </section>
@@ -61,10 +61,11 @@ const user = () => {
           </div>
           <div className="account-content-wrapper cta">
             <button
-              className="transaction-button"
-              onClick={() => goToTransactions("credit")}
+              className="chevron-button"
+              onClick={() => goToTransactions("checking")}
+              aria-label="View transactions"
             >
-              View transactions
+              &rsaquo;
             </button>
           </div>
         </section>

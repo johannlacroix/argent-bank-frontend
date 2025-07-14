@@ -22,7 +22,7 @@ export default function Transactions() {
 
       <section className="transaction">
         <div className="transaction-row">
-          <div className="transaction-main">
+          <div className="transaction-main"> 
             <span>27/02/20</span>
             <span>Golden Sun Bakery</span>
           </div>
@@ -30,12 +30,14 @@ export default function Transactions() {
             <span>$8.00</span>
             <span>$298.00</span>
             <button className="expand-btn" onClick={toggleDetails}>
-              {isExpanded ? "▴" : "▾"}
-            </button>
+  <span className={`chevron ${isExpanded ? "down" : "up"}`}>&#x276F;</span>
+</button>
+
+
           </div>
         </div>
 
-        {/* Détail extensible (comme dans l’image) */}
+        {/* Détail extensible*/}
         <div className={`transaction-details ${isExpanded ? "show" : ""}`}>
           <div className="transacttion-row">
             <div className="transaction-main-col">

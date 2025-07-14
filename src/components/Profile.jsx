@@ -12,11 +12,10 @@ export default function Profile() {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    const token=localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token && !user) {
       dispatch(fetchUserProfile());
     }
-  
   }, [dispatch]);
 
   const handleSave = async () => {
@@ -43,19 +42,19 @@ export default function Profile() {
         <h1 className="profile">Edit user info</h1>
         <div className="form-container">
           <label className="profile" htmlFor="username">
-            User name:{" "}
+            Username:{" "}
           </label>
           <input
             type="text"
             className="field"
-            value={editableUserName}
+            value={editableUserName || user?.userName || ""}
             onChange={(e) => setEditableUserName(e.target.value)}
-            disabled={!editMode}
+            readOnly={!editMode}
           />
         </div>
         <div className="form-container">
           <label className="profile" htmlFor="firstname">
-            First name:{" "}
+            Firstname:{" "}
           </label>
           <input
             type="text"
@@ -72,7 +71,7 @@ export default function Profile() {
         </div>
         {!editMode ? (
           <button onClick={() => setEditMode(true)} className="btn-green">
-            Edit
+            Edit Username
           </button>
         ) : (
           <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>

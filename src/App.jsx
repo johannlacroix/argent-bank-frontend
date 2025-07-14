@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
 
           <Route
-            path="/profile"
+            path="/user"
             element={
               <PrivateRoute>
                 <User />
@@ -32,7 +32,7 @@ function App() {
           />
         </Route>
 
-        <Route path="/login" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </Router>
   );

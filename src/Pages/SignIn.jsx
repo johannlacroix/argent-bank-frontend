@@ -17,7 +17,7 @@ function SignIn() {
     const result = await dispatch(loginUser({ email, password }))
     if (loginUser.fulfilled.match(result)) {
       // await dispatch(fetchUserProfile())
-      navigate('/profile')
+      navigate('/user')
     }
   }
 

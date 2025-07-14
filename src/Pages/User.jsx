@@ -18,11 +18,9 @@ const user = () => {
         <Profile />
         <div className="header">
           <h1 className="welcome">
-            Welcome back
-            <br />
-            {user?.userName}
+            Welcome back {user?.userName}
           </h1>
-          <button className="edit-button">Edit Name</button>
+          {/* <button className="edit-button">Edit Name</button> */}
         </div>
         <h2 className="sr-only">Accounts</h2>
         <section className="account">

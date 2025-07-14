@@ -13,7 +13,7 @@ function Layout() {
   };
 
   const handleGoToProfile = () => {
-    navigate("/profile"); // ou "/user" si tu préfères
+    navigate("/user"); // ou "/user" si tu préfères
   };
 
   const handleGoToSettings = () => {
@@ -66,7 +66,7 @@ function Layout() {
               ></i>
             </>
           ) : (
-            <Link className="main-nav-item" to="/login">
+            <Link className="main-nav-item" to="/signin">
               <i className="fa fa-user-circle"></i>
               Sign In
             </Link>

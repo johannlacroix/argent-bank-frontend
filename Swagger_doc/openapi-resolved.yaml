@@ -1,0 +1,175 @@
+openapi: 3.0.0                     # Version OpenAPI
+info:
+  title: Argent Bank Transactions API     # Titre de l'API
+  description: API pour la gestion des transactions d’un utilisateur authentifié  # résumé
+  version: 1.0.0                  # Version de ton API
+servers:
+- url: http://localhost:3001/api/v1    # URL de base du serveur
+
+security:
+- bearerAuth: []                 # token JWT requis
+
+paths:                           # toutes les routes de l’API listées après "paths:"
+
+  /transactions/{accountId}:     # Route pour lister toutes les transactions d’un compte
+    get:
+      summary: Liste des transactions du mois en cours pour un compte
+      parameters:                # paramètre de route (obligatoire)
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: checking      # Exemple de valeur (checking, savings, etc)
+      responses:
+        "200":
+          description: Liste des transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Transaction"  # format d’1 transaction
+        "401":
+          description: Non autorisé (JWT manquant ou invalide)
+        "404":
+          description: Compte non trouvé
+      security:
+      - bearerAuth: []
+
+  /transactions/{accountId}/{transactionId}:    # route d’accès à une transaction spécifique
+    get:
+      summary: Détail d'une transaction spécifique
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Détails de la transaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "401":
+          description: Non autorisé
+        "404":
+          description: Transaction non trouvée
+      security:
+      - bearerAuth: []
+
+    put:
+      summary: Modifier les informations d'une transaction
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Informations modifiables d’une transaction
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/accountId_transactionId_body"  # On modifie la catégorie et/ou la note
+        required: true
+      responses:
+        "200":
+          description: Informations mises à jour
+        "400":
+          description: Données invalides
+        "401":
+          description: Non autorisé
+        "404":
+          description: Transaction non trouvée
+      security:
+      - bearerAuth: []
+
+    delete:
+      summary: Supprimer les informations personnalisées d'une transaction
+      description: Supprime uniquement les champs `note` et `category`
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Champs supprimés avec succès  # Aucun contenu en retour
+        "401":
+          description: Non autorisé
+        "404":
+          description: Transaction non trouvée
+      security:
+      - bearerAuth: []
+
+components:
+  schemas:                      # Les modèles de données utilisés dans les réponses
+
+    Transaction:                # Schéma pour une transaction
+      type: object
+      properties:
+        id:
+          type: string
+          example: txn_123456
+        accountId:
+          type: string
+          example: checking
+        date:
+          type: string
+          format: date
+          example: 2025-07-01
+        description:
+          type: string
+          example: Golden Sun Bakery
+        amount:
+          type: number
+          format: float
+          example: 8
+        balance:
+          type: number
+          format: float
+          example: 298
+        type:
+          type: string
+          example: Electronic
+        category:
+          type: string
+          example: Food
+        note:
+          type: string
+          example: Petit déjeuner
+
+    accountId_transactionId_body:   # Corps de la requête PUT
+      type: object
+      properties:
+        category:
+          type: string
+          example: Transport
+        note:
+          type: string
+          example: Ticket métro
+
+  securitySchemes:
+    bearerAuth:                 # Définition de l’authentification JWT (Bearer token)
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

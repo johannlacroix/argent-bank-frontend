@@ -22,7 +22,7 @@ export default function Transactions() {
 
       <section className="transaction">
         <div className="transaction-row">
-          <div className="transaction-main"> 
+          <div className="transaction-main">
             <span>27/02/20</span>
             <span>Golden Sun Bakery</span>
           </div>
@@ -30,10 +30,10 @@ export default function Transactions() {
             <span>$8.00</span>
             <span>$298.00</span>
             <button className="expand-btn" onClick={toggleDetails}>
-  <span className={`chevron ${isExpanded ? "down" : "up"}`}>&#x276F;</span>
-</button>
-
-
+              <span className={`chevron ${isExpanded ? "down" : "up"}`}>
+                &#x276F;
+              </span>
+            </button>
           </div>
         </div>
 

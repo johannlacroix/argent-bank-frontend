@@ -37,7 +37,7 @@ paths:                           # toutes les routes de l’API listées après 
       security:
       - bearerAuth: []
 
-  /transactions/{accountId}/{transactionId}:    # route d’accès à une transaction spécifique
+  /transactions/{accountId}/{transactionId}:
     get:
       summary: Détail d'une transaction spécifique
       parameters:
@@ -65,8 +65,9 @@ paths:                           # toutes les routes de l’API listées après 
       security:
       - bearerAuth: []
 
-    put:
-      summary: Modifier les informations d'une transaction
+    patch:
+      summary: Modifier ou supprimer les informations personnalisées d'une transaction
+      description: Modifie les champs `note` et/ou `category` d’une transaction, ou les supprime si `delete` vaut `true`.
       parameters:
       - name: accountId
         in: path
@@ -79,17 +80,16 @@ paths:                           # toutes les routes de l’API listées après 
         schema:
           type: string
       requestBody:
-        description: Informations modifiables d’une transaction
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/accountId_transactionId_body"  # On modifie la catégorie et/ou la note
-        required: true
+              $ref: "#/components/schemas/TransactionPatchRequest"
       responses:
         "200":
-          description: Informations mises à jour
+          description: Modification ou suppression effectuée
         "400":
-          description: Données invalides
+          description: Requête invalide
         "401":
           description: Non autorisé
         "404":
@@ -97,34 +97,11 @@ paths:                           # toutes les routes de l’API listées après 
       security:
       - bearerAuth: []
 
-    delete:
-      summary: Supprimer les informations personnalisées d'une transaction
-      description: Supprime uniquement les champs `note` et `category`
-      parameters:
-      - name: accountId
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: transactionId
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: Champs supprimés avec succès  # Aucun contenu en retour
-        "401":
-          description: Non autorisé
-        "404":
-          description: Transaction non trouvée
-      security:
-      - bearerAuth: []
 
 components:
-  schemas:                      # Les modèles de données utilisés dans les réponses
+  schemas:
 
-    Transaction:                # Schéma pour une transaction
+    Transaction:
       type: object
       properties:
         id:
@@ -158,8 +135,9 @@ components:
           type: string
           example: Petit déjeuner
 
-    accountId_transactionId_body:   # Corps de la requête PUT
+    TransactionPatchRequest:
       type: object
+      description: Les champs à modifier ou à supprimer
       properties:
         category:
           type: string
@@ -167,9 +145,12 @@ components:
         note:
           type: string
           example: Ticket métro
+        delete:
+          type: boolean
+          example: false
 
   securitySchemes:
-    bearerAuth:                 # Définition de l’authentification JWT (Bearer token)
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT

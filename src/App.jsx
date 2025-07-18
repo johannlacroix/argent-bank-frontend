@@ -12,7 +12,6 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-
           <Route
             path="/user"
             element={
@@ -21,7 +20,6 @@ function App() {
               </PrivateRoute>
             }
           />
-
           <Route
             path="/transactions/:accountId"
             element={
@@ -31,7 +29,6 @@ function App() {
             }
           />
         </Route>
-
         <Route path="/signin" element={<SignIn />} />
       </Routes>
     </Router>
